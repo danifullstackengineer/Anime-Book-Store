@@ -22,7 +22,7 @@
   justify-content: center;
   align-items: center;
 }
-.header__icon > img {
+.header__icon a > img {
   background: transparent;
   max-width: 150px;
   max-height: 105px;
@@ -98,6 +98,9 @@
   cursor: pointer;
   color: white;
 }
+.header__top-right-basket-icon {
+  margin-bottom: 0.15em;
+}
 .header__top-right-basket-amount {
   display: flex;
   justify-content: center;
@@ -123,9 +126,9 @@
   letter-spacing: 0.25em;
   transition: all 100ms ease-in-out;
   cursor: pointer;
+  border: 1px solid transparent;
 }
 .header__bottom-option:hover{
     color: cyan;
-    font-size: 1.35rem;
     border: 1px solid white;
 }
