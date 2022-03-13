@@ -1,0 +1,46 @@
+.leftHeader {
+  width: 75px;
+  height: calc(100vh - 180px);
+  background-color: rgba(109, 247, 240, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transform: translateX(-200%);
+}
+.leftHeader__hidden {
+    animation: 200ms ease-in-out slideOut;
+    transform: translateX(-200%);
+}
+.leftHeader__shown {
+    transform: translateX(0);
+    animation: 200ms ease-in-out slideIn;
+}
+.leftHeader > div {
+  flex: 0.33333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+.leftHeader__icon {
+  color: black;
+  cursor: pointer;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-200%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+@keyframes slideOut {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-200%);
+    }
+}
