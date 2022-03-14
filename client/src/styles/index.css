@@ -1,9 +1,11 @@
 html {
-    min-height: 100%;
+  min-height: 100%;
+  scroll-behavior: smooth;
 }
 * {
   margin: 0;
   padding: 0;
+  user-select: none;
 }
 button {
   cursor: pointer;
@@ -15,11 +17,24 @@ a {
 .app {
   width: 100vw;
   height: 100vh;
-  background-image: url('../assets/gif/demonslayerbg.jpg');
+  min-width: 1080px;
+  background-image: url("../assets/gif/demonslayerbg.jpg");
   background-position: center center;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-webkit-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+::-webkit-scrollbar {
+  width: 8.5px;
+}
+::-webkit-scrollbar-track {
+  background-color: rgba(109, 247, 240, 0.4);
+}
+::-webkit-scrollbar-thumb {
+  background-color: cyan;
+}
+body::-webkit-scrollbar{
+  display: none;
 }

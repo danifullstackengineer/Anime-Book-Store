@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../styles/components/body.css";
-import SliderItem from "./Body/SliderItem";
 import ISliderItem from "../types/SliderItem";
 import LeftHeader from "./Body/LeftHeader";
+import BodyContent from './Body/BodyContent/BodyContent';
 
 function Body({ isMouseOverMenu }: { isMouseOverMenu: boolean }) {
   const [sliderItems, setSliderItems] = useState<ISliderItem[]>([
@@ -16,6 +16,7 @@ function Body({ isMouseOverMenu }: { isMouseOverMenu: boolean }) {
       description:
         "E-rank hunter Jinwoo Sung has no money, no talent, and no prospects to speak of - and apparently, no luck, either! When he enters a hidden double dungeon one fateful day, he’s abandoned by his party and left to die at the hands of some of the most horrific monsters he’s ever encountered. But just before the last, fatal blow...ping! [Congratulations on becoming a Player.]",
     },
+    
     {
       image: "https://m.media-amazon.com/images/I/51OFWZpPsOS.jpg",
       link: "./lightnovels/sololeveling/vol=2",
@@ -32,7 +33,7 @@ function Body({ isMouseOverMenu }: { isMouseOverMenu: boolean }) {
     <div className="body">
       <LeftHeader isMouseOverMenu={ isMouseOverMenu}/>
 
-      <div className="body__content"></div>
+      <BodyContent/>
     </div>
   );
 }

@@ -1,8 +1,0 @@
-.sliderItem {
-  width: 50%;
-}
-.sliderItem__top > img {
-  width: 100px;
-  object-fit: contain;
-  object-position: 50% 50%;
-}

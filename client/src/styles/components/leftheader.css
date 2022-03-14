@@ -1,23 +1,44 @@
 .leftHeader {
-  width: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: calc(100vh - 180px);
-  background-color: rgba(109, 247, 240, 0.4);
+  transform: translateX(-100%);
+  position: relative;
+  z-index: 4;
+}
+.leftHeader__mainIcon {
+    font-size: 1.75rem;
+    margin-left: 0.25em;
+    color: orange;
+    position: absolute;
+}
+.leftHeader__mainIcon-hidden {
+    display: none;
+}
+.leftHeader__mainIcon-visible{ 
+    display: block;
+}
+.leftHeader__shown {
+  transform: translateX(0);
+  animation: 200ms ease-in-out slideIn;
+}
+.leftHeader__hidden {
+  transform: translateX(-100%);
+  animation: 200ms ease-in-out slideOut;
+}
+.leftHeader__options {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  transform: translateX(-200%);
+  height: 100%;
+  width: 75px;
+  background-color: rgba(109, 247, 240, 0.4);
+  z-index: 5;
 }
-.leftHeader__hidden {
-    animation: 200ms ease-in-out slideOut;
-    transform: translateX(-200%);
-}
-.leftHeader__shown {
-    transform: translateX(0);
-    animation: 200ms ease-in-out slideIn;
-}
-.leftHeader > div {
-  flex: 0.33333;
+.leftHeader__options > div {
+  flex: 0.3333;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,20 +48,67 @@
   color: black;
   cursor: pointer;
 }
-
+.leftHeader__dropdown {
+  width: 400px;
+  max-height: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  transform: translateX(calc(-100% - 75px));
+  z-index: 4;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  background: transparent;
+}
+.leftHeader__dropdown >img {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: contain;
+  object-position: 50% 50%;
+}
+.leftHeader__dropdown > div {
+  z-index: 6;
+}
+.leftHeader__dropdown-active {
+  animation: 200ms ease-in-out slideDropdown;
+  transform: translateX(0);
+}
+.leftHeader__dropdown-hidden {
+  animation: 200ms ease-in-out slideDropdownOut;
+  transform: translateX(calc(-100% - 75px));
+}
 @keyframes slideIn {
-    0% {
-        transform: translateX(-200%);
-    }
-    100% {
-        transform: translateX(0);
-    }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 @keyframes slideOut {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-200%);
-    }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@keyframes slideDropdown {
+  0% {
+    transform: translateX(calc(-100% - 75px));
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes slideDropdownOut {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% - 75px));
+  }
 }
