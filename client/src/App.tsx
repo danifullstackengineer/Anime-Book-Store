@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Body from "./components/Body";
 import Header from "./components/Header";
 
+
 function App() {
   const ref = useRef(null);
   const mouse = useMouse(ref, {
@@ -34,7 +35,16 @@ function App() {
             element={
               <>
                 <Header />
-                <Body isMouseOverMenu={isMouseOverMenu} />
+                <Body isMouseOverMenu={isMouseOverMenu} isMainPage={true} />
+              </>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <>
+                <Header />
+                <Body isMouseOverMenu={isMouseOverMenu} isMainPage={false}/>
               </>
             }
           />
