@@ -18,8 +18,12 @@ const RootQuery = new GraphQLObjectType({
       type: UserType,
       args: {
         id: { type: GraphQLID },
+        email: { type: GraphQLString },
       },
       async resolve(par, args) {
+        if (args.email) {
+          return User.findOne({ email: args.email });
+        }
         return User.findById(args.id);
       },
     },

@@ -8,6 +8,7 @@ import useMouse from "@react-hook/mouse-position";
 import ISliderItem from "../../types/SliderItem";
 import { BiRightArrow } from "react-icons/bi";
 import tomiokaBG from "../../assets/gif/tomioka-anime.gif";
+import returnId from "../../logic/randomID";
 
 function LeftHeader({ isMouseOverMenu }: { isMouseOverMenu: boolean }) {
   const [className, setClassName] = useState<string>("");
@@ -80,6 +81,7 @@ function LeftHeader({ isMouseOverMenu }: { isMouseOverMenu: boolean }) {
     const jsx = best.map((item: ISliderItem, i: number) => {
       return (
         <DropdownLeft
+          id={returnId()}
           key={i}
           image={item.image}
           link={item.link}

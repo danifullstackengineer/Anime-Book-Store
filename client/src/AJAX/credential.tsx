@@ -8,7 +8,6 @@ const register = async (
   var result = {
     success: false,
     message: "Failed to register, please try again!",
-    data: { username: "", password: "" },
   };
   await $.ajax({
     url: "/register",
@@ -17,8 +16,8 @@ const register = async (
       email: email,
       password: password,
     },
-  }).done((res: any) => {
-    console.log(res);
+  }).done((res: IQueryResult) => {
+    result = res;
   });
   return result;
 };
@@ -26,16 +25,48 @@ const register = async (
 const sendCode = async (email: string): Promise<IQueryResult> => {
   var result = {
     success: false,
-    message: "Failed to send code, please try again!",
+    message: "There was an error sending your code!",
   };
   await $.ajax({
     url: "/sendCode",
     type: "POST",
     data: { email: email },
   }).done((res: any) => {
-      result = res;
+    result = res;
   });
-    return result;
+  return result;
 };
 
-export { register, sendCode };
+const login = async (
+  email: string,
+  password: string
+): Promise<IQueryResult> => {
+  var result = {
+    success: false,
+    message: "Failed to login. Please try again!",
+  };
+  await $.ajax({
+    url: "/login",
+    type: "POST",
+    data: { email: email, password: password },
+  }).done((res: IQueryResult) => {
+    result = res;
+  });
+  return result;
+};
+
+const authJWT = async (): Promise<IQueryResult> => {
+  var result = { success: false, message: "Failed to authenticate Token" };
+  await $.ajax({
+    url: "/isUserAuth",
+    type: "GET",
+    headers: {
+      "x-access-token": localStorage.getItem("token"),
+    },
+  }).done((res: IQueryResult) => {
+    result = res;
+  });
+  return result;
+};
+
+export { register, sendCode, login, authJWT };

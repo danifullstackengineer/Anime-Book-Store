@@ -3,12 +3,15 @@ import "../../styles/components/Credential/credential.css";
 import VerificationInput from "react-verification-input";
 import Regex from "./Regex";
 import { checkRegex } from "../../logic/regex/credential";
-import { register, sendCode } from "../../AJAX/credential";
+import { register, sendCode, login } from "../../AJAX/credential";
 import IQueryResult from "../../types/QueryResult";
-import { useLazyQuery } from "@apollo/client";
-import { registerQuery } from "../../apollo/credential";
+import { useNavigate } from "react-router-dom";
+import { setEmailAction } from "../../redux/slice";
+import { useDispatch } from "react-redux";
 
 function Credential() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [code, setCode] = useState<string>();
@@ -26,6 +29,11 @@ function Credential() {
   const codeDivRef = useRef<HTMLDivElement>(null!);
   const registerRef = useRef<HTMLButtonElement>(null!);
 
+  const [logginMessage, setLogginMessage] = useState<string>();
+  const [timeoutLog, setTimeoutLog] = useState<boolean>(false);
+  const [codeMessage, setCodeMessage] = useState<string>();
+  const [timeoutShowCode, setTimeoutShowCode] = useState<boolean>(false);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     switch (e.target.name) {
       case "email":
@@ -41,27 +49,57 @@ function Credential() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    if (emailValid && passwordValid && !timeoutLog) {
+      login(email, password).then((res) => {
+        if (res.success && res.data && res.data.token) {
+          localStorage.setItem("token", res.data.token);
+          setLogginMessage(res.message);
+          dispatch(setEmailAction(email));
+          setTimeout(() => {
+            navigate("/");
+          }, 3000);
+        } else {
+          setLogginMessage(res.message);
+          setTimeoutLog(true);
+          setTimeout(() => {
+            setLogginMessage(undefined);
+            setTimeoutLog(false);
+          }, 3000);
+        }
+      });
+    }
   };
 
   const handleCodeChange = (e: string): void => {
     setCode(e);
     if (parseInt(e) === serverCode) {
       doRegisterSuccess();
+      setCodeMessage("Code was correct, you are registered!");
     }
   };
 
   const doRegisterSuccess = (): void => {
-    register(email, password).then((res) => {});
-    setIsValidCode(true);
-    setShowCode(false);
-    codeDivRef.current.style.display = "none";
-    registerRef.current.style.display = "none";
+    register(email, password).then((res) => {
+      if (res.success) {
+        console.log("created user!");
+        setIsValidCode(true);
+        setShowCode(false);
+        codeDivRef.current.style.display = "none";
+      } else {
+        alert(res.message);
+      }
+    });
   };
 
   const handleRegister = async (): Promise<void> => {
     setClickedReg(true);
-    if (emailValid && passwordValid) {
+    if (emailValid && passwordValid && !timeoutShowCode) {
       setShowCode(true);
+      setTimeoutShowCode(true);
+      setTimeout(() => {
+        setTimeoutShowCode(false);
+        setShowCode(false);
+      }, 2500);
     } else {
       setClickedReg(false);
       return;
@@ -69,8 +107,6 @@ function Credential() {
     await sendCode(email).then((res: IQueryResult): void => {
       if (res.success) {
         setServerCode(res.data?.code);
-      } else {
-        alert(res.message);
       }
     });
   };
@@ -121,7 +157,10 @@ function Credential() {
                 }}
               />
             </div>
-            <button ref={registerRef} onClick={handleRegister}>
+            <button
+              ref={registerRef}
+              onClick={isValidCode ? undefined : handleRegister}
+            >
               {clickedReg && email && password && emailValid && passwordValid
                 ? isValidCode
                   ? "Verified"
@@ -161,6 +200,14 @@ function Credential() {
             className={showCode ? "regex__shown regex__dissapear" : ""}
             code={true}
             emailValue={email}
+          />
+          <Regex
+            className={logginMessage ? "regex__shown regex__dissapear" : ""}
+            loggin={logginMessage}
+          />
+          <Regex
+            className={codeMessage ? "regex__shown regex__dissapear" : ""}
+            codeMessage={codeMessage}
           />
         </div>
       </div>

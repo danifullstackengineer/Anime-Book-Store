@@ -5,6 +5,5 @@ export default interface ISliderItem {
     rating: number,
     price: number,
     genre: string[],
-    description: string,
-    id?: number
+    description: string
 }

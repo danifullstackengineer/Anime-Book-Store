@@ -4,6 +4,7 @@ import ISliderItem from "../../../types/SliderItem";
 import BestItem from "../SlideLeft/BestItem";
 import NewArrivalItems from "./NewArrivalItems";
 import newArr from "../../../assets/gif/newArr.gif";
+import returnId from "../../../logic/randomID";
 
 function BodyContent() {
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -176,6 +177,7 @@ function BodyContent() {
             {currentSlider?.map((item: ISliderItem, i: number) => {
               return (
                 <BestItem
+                  id={returnId()}
                   key={i}
                   image={item.image}
                   link={item.link}
@@ -193,6 +195,7 @@ function BodyContent() {
             {bodyItems1?.map((item: ISliderItem, i: number) => {
               return (
                 <NewArrivalItems
+                  id={returnId()}
                   key={i}
                   image={item.image}
                   link={item.link}
@@ -210,6 +213,7 @@ function BodyContent() {
             {bodyItems2?.map((item: ISliderItem, i: number) => {
               return (
                 <NewArrivalItems
+                  id={returnId()}
                   key={i}
                   image={item.image}
                   link={item.link}
@@ -227,6 +231,7 @@ function BodyContent() {
             {bodyItems3?.map((item: ISliderItem, i: number) => {
               return (
                 <NewArrivalItems
+                  id={returnId()}
                   key={i}
                   image={item.image}
                   link={item.link}

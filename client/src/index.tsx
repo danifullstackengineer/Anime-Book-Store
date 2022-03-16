@@ -9,6 +9,15 @@ import {
   from,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
+import userSlice from "./redux/slice";
+import { Provider } from "react-redux";
+import { configureStore } from "@reduxjs/toolkit";
+
+export const store = configureStore({
+  reducer: {
+    user: userSlice.reducer,
+  },
+});
 
 const httpLink = new HttpLink({
   uri: "http://localhost:5000/graphql",
@@ -38,9 +47,11 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
+    <Provider store={store}>
+      <ApolloProvider client={client}>
+        <App />
+      </ApolloProvider>
+    </Provider>
   </React.StrictMode>,
   document.querySelector("#root")
 );

@@ -4,7 +4,6 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  cursor: pointer;
   padding: 0.25em;
 }
 .bestItem:not(.mainSlider) {
@@ -63,6 +62,7 @@
   flex-wrap: wrap;
   height: 55%;
   overflow: hidden;
+  cursor: pointer;
 }
 .bestItem__description {
   max-width: 200px;
@@ -97,4 +97,15 @@
 }
 .bestItem__iconGolden {
   color: orange;
+}
+.bestItem__info-btn {
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  margin-left: 0.5em;
+  background-color: cyan;
+  border: none;
+  transition: all 200ms ease-in-out;
+  border-radius: 2.5em;
+}
+.bestItem__info-btn:hover {
+  background-color: orange;
 }

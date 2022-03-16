@@ -5,5 +5,7 @@ export default interface IQueryResult {
         username?: string,
         password?: string,
         code?: number,
+        id?: string,
+        token: string
     }
 }

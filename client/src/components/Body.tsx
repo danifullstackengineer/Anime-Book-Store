@@ -4,13 +4,16 @@ import ISliderItem from "../types/SliderItem";
 import LeftHeader from "./Body/LeftHeader";
 import BodyContent from "./Body/BodyContent/BodyContent";
 import Credential from "./Credentials/Credential";
+import RightHeader from "./Body/RightHeader";
 
 function Body({
   isMouseOverMenu,
   isMainPage,
+  clickedBasket,
 }: {
   isMouseOverMenu: boolean;
   isMainPage: boolean;
+  clickedBasket: boolean | undefined;
 }) {
   const [sliderItems, setSliderItems] = useState<ISliderItem[]>([
     {
@@ -41,6 +44,8 @@ function Body({
       <LeftHeader isMouseOverMenu={isMouseOverMenu} />
 
       {isMainPage ? <BodyContent /> : <Credential />}
+
+      <RightHeader clickedBasket={clickedBasket} />
     </div>
   );
 }

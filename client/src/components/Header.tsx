@@ -1,11 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/components/header.css";
 import header__logo from "../assets/img/header__logo.png";
 import { AiOutlineSearch } from "react-icons/ai";
 import { BsCart3 } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
+import { authJWT } from "../AJAX/credential";
+import jwt from "jwt-decode";
+import { addAllItemsToBasket, logoutAction } from "../redux/slice";
+import { useDispatch } from "react-redux";
+import { store } from "../index";
 
-function Header() {
+function Header({
+  clickedBasket,
+  setClickedBasket,
+}: {
+  clickedBasket: boolean | undefined;
+  setClickedBasket: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+}) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      authJWT().then((res) => {
+        if (res.success && token) {
+          const data: { id: string } = jwt(token);
+        }
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    const basket = localStorage.getItem("basket");
+    if (basket) {
+      const basketP = JSON.parse(basket);
+      dispatch(addAllItemsToBasket(basketP));
+    }
+  }, []);
+
   const [search, setSearch] = useState<string>("");
   const navigate = useNavigate();
 
@@ -20,7 +52,14 @@ function Header() {
   const navigateToOrdersAndReturns = (): void => {
     navigate("/orders");
   };
-  const showCart = (): void => {};
+  const showCart = (): void => {
+    setClickedBasket(!clickedBasket);
+  };
+
+  const logout = () => {
+    dispatch(logoutAction());
+    localStorage.removeItem("token");
+  };
 
   return (
     <div className="header">
@@ -42,11 +81,18 @@ function Header() {
         </div>
         <div className="header__top-right">
           <div className="header__top-right-options">
-            <div className="header__top-right-option" onClick={navigateToLogin}>
+            <div
+              className="header__top-right-option"
+              onClick={store.getState().user.email ? logout : navigateToLogin}
+            >
               <span className="header__top-right-option-lineOne">
-                Hello, Guest
+                {store.getState().user.email
+                  ? "Hello, " + store.getState().user.email?.substring(0, 4)
+                  : "Hello, Guest"}
               </span>
-              <span className="header__top-right-option-lineTwo">Sign In</span>
+              <span className="header__top-right-option-lineTwo">
+                {store.getState().user.email ? "Sign Out" : "Sign In"}
+              </span>
             </div>
             <div
               className="header__top-right-option"
@@ -59,7 +105,9 @@ function Header() {
             </div>
           </div>
           <div className="header__top-right-basket" onClick={showCart}>
-            <span className="header__top-right-basket-amount">0</span>
+            <span className="header__top-right-basket-amount">
+              {store.getState().user.basket.length}
+            </span>
             <BsCart3 className="header__top-right-basket-icon" />
           </div>
         </div>

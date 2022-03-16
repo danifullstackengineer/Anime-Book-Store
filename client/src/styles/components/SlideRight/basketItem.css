@@ -1,0 +1,75 @@
+.basketItem__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0.25em 0.25em 0.25em 0.25em;
+  width: 200px;
+  background: url("../../../assets/gif/basket_bg.gif");
+  background-size: cover cover;
+  background-repeat: no-repeat;
+}
+.basketItem__container-remove {
+  animation: 400ms ease-out removeItem forwards;
+}
+.basketItem__container-removed {
+  transform: translateX(150%);
+  display: none;
+}
+.basketItem__item-title {
+  color: white;
+  font-weight: 600;
+  font-size: 1.15rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0.5em 0.25em 0.5em 0.25em;
+}
+.basketItem__item-image > img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  object-fit: contain;
+  object-position: 50% 50%;
+  width: 100px;
+}
+.basketItem__item-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0.5em;
+}
+.basketItem__item-price {
+  color: white;
+}
+.basketItem__item-info > span {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0.5em;
+}
+.basketItem__item-golden {
+  color: orange;
+}
+.basketItem__item-btn {
+  color: black;
+  margin: 0.25em 0.25em 0.5em 0.25em;
+  background-color: orange;
+  padding: 0.125em 0.25em 0.125em 0.25em;
+  border: none;
+}
+@keyframes removeItem {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    transform: translateX(150%);
+    opacity: 0;
+    visibility: hidden;
+  }
+}

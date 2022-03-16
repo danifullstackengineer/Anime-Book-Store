@@ -3,6 +3,9 @@ import "../../../styles/components/SlideLeft/bestItem.css";
 import ISliderItem from "../../../types/SliderItem";
 import { AiFillStar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToBasketAction } from "../../../redux/slice";
+import { addToBasketToken } from "../../../logic/basket";
 
 function DropdownLeft({
   image,
@@ -13,6 +16,7 @@ function DropdownLeft({
   genre,
   description,
   isMainSlider,
+  id,
 }: {
   image: ISliderItem["image"];
   link: ISliderItem["link"];
@@ -21,9 +25,11 @@ function DropdownLeft({
   price: ISliderItem["price"];
   genre: ISliderItem["genre"];
   description: ISliderItem["description"];
-  isMainSlider?: boolean;
+    isMainSlider?: boolean;
+  id:number
 }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const renderRating = (): JSX.Element[] => {
     var arr: JSX.Element[] = [];
@@ -35,6 +41,31 @@ function DropdownLeft({
       }
     }
     return arr;
+  };
+
+  const addToBasket = (): void => {
+    dispatch(
+      addToBasketAction({
+        image: image,
+        link: link,
+        name: name,
+        rating: rating,
+        price: price,
+        genre: genre,
+        description: description,
+        id: id,
+      })
+    );
+    addToBasketToken({
+      image,
+      link,
+      name,
+      rating,
+      price,
+      genre,
+      description,
+      id
+    });
   };
 
   return (
@@ -50,6 +81,9 @@ function DropdownLeft({
       <div className="bestItem__info bestItem__info1">
         <span className="bestItem__info-price">$ {price}</span>
         <span className="bestItem__info-rating">{renderRating()}</span>
+        <button className="bestItem__info-btn" onClick={addToBasket}>
+          Add to Basket
+        </button>
       </div>
       <div className="bestItem__info">
         {genre.map((gr: string, i: number) => {
