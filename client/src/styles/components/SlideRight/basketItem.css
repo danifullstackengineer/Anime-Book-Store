@@ -9,8 +9,12 @@
   background-size: cover cover;
   background-repeat: no-repeat;
 }
+.basketItem__container:not(.basketItem__container-remove) {
+  transform: translateX(0);
+}
 .basketItem__container-remove {
   animation: 400ms ease-out removeItem forwards;
+  transform: translateX(0);
 }
 .basketItem__container-removed {
   transform: translateX(150%);

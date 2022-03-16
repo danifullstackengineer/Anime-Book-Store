@@ -21,7 +21,7 @@ export const getBasketTotal = (basket: ISliderItem[]) => {
   var total = 0;
   basket.map((item) => (total += item.price));
   return total.toFixed(2);
-}
+};
 
 const userSlice = createSlice({
   name: "user",
@@ -42,10 +42,10 @@ const userSlice = createSlice({
       state.id = null;
     },
     addToBasketAction: (state: stateUser, action: any) => {
-      state.basket.push(action.payload);
+      state.basket.unshift(action.payload);
     },
     removeFromBasketAction: (state: stateUser, action: any) => {
-      state.basket = state.basket.filter(item => item.id !== action.payload);
+      state.basket = state.basket.filter((item) => item.id !== action.payload);
     },
     addAllItemsToBasket: (state: stateUser, action: any) => {
       state.basket = action.payload;
