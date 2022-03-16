@@ -13,7 +13,7 @@ const addToBasketToken = ({
   const basket = localStorage.getItem("basket");
   if (basket) {
     var myJSON = JSON.parse(basket);
-    myJSON.push({
+    myJSON.unshift({
       id: id,
       image: image,
       link: link,
@@ -45,7 +45,7 @@ const addToBasketToken = ({
 const removeFromBasketToken = (id: number) => {
   const basket = localStorage.getItem("basket");
   if (basket) {
-    var myJSON = JSON.parse(basket); 
+    var myJSON = JSON.parse(basket);
     myJSON.splice(id, 1);
     localStorage.removeItem("basket");
     localStorage.setItem("basket", JSON.stringify(myJSON));
