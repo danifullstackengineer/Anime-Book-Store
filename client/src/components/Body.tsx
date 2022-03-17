@@ -5,15 +5,22 @@ import LeftHeader from "./Body/LeftHeader";
 import BodyContent from "./Body/BodyContent/BodyContent";
 import Credential from "./Credentials/Credential";
 import RightHeader from "./Body/RightHeader";
+import Checkout from "./Body/Checkout/Checkout";
 
 function Body({
   isMouseOverMenu,
   isMainPage,
+  isCheckout,
+  isCredential,
   clickedBasket,
+  setClickedBasket,
 }: {
   isMouseOverMenu: boolean;
-  isMainPage: boolean;
+  isMainPage?: boolean;
+  isCheckout?: boolean;
+  isCredential?: boolean;
   clickedBasket: boolean | undefined;
+  setClickedBasket: React.Dispatch<React.SetStateAction<boolean | undefined>>;
 }) {
   const [sliderItems, setSliderItems] = useState<ISliderItem[]>([
     {
@@ -39,13 +46,29 @@ function Body({
     },
   ]);
 
+  const render = (): JSX.Element => {
+    if (isMainPage === true) {
+      return <BodyContent />;
+    }
+    if (isCheckout === true) {
+      return <Checkout />;
+    }
+    if (isCredential === true) {
+      return <Credential />;
+    }
+    return <></>;
+  };
+
   return (
     <div className="body">
       <LeftHeader isMouseOverMenu={isMouseOverMenu} />
 
-      {isMainPage ? <BodyContent /> : <Credential />}
+      {render()}
 
-      <RightHeader clickedBasket={clickedBasket} />
+      <RightHeader
+        clickedBasket={clickedBasket}
+        setClickedBasket={setClickedBasket}
+      />
     </div>
   );
 }

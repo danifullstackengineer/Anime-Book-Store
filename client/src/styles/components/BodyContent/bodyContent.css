@@ -1,7 +1,6 @@
 .bodyContent {
   width: 100%;
   height: calc(100vh - 180px);
-  min-width: 1500px;
   transform: translateX(-400px);
   z-index: 2;
   display: flex;

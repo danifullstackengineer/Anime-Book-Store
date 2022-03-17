@@ -7,6 +7,7 @@
   height: 180px;
   position: sticky;
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
 }
 .header__top {
   flex: 0.5;
@@ -17,23 +18,23 @@
   flex-direction: row;
 }
 .header__icon {
-  flex: 0.25;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
+  margin-left: 20px;
 }
 .header__icon a > img {
   background: transparent;
-  max-width: 150px;
-  max-height: 105px;
+  width: 150px;
   cursor: pointer;
 }
 .header__search {
-  flex: 0.5;
+  flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 10em 0 10em;
+  margin: 0 5em 0 5em;
   border-radius: 0.5em;
   background-color: #e2e2e4;
 }
@@ -46,25 +47,26 @@
 .header__searchIcon:hover {
   font-size: 1.2rem;
   color: blue;
+  flex: 0.1;
 }
 .header__search > input {
   font-size: 1.2rem;
-  width: 90%;
   border-radius: 0.5em;
   outline: none;
   padding: 0.4em 0.4em 0.4em 0.5em;
   border: none;
   background: transparent;
+  width: 90%;
 }
 .header__search > input::placeholder {
   color: #545455;
   font-size: 1rem;
 }
 .header__top-right {
-  flex: 0.25;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-evenly;
+  margin-right: 20px;
+  width: 300px;
 }
 .header__top-right-options {
   display: flex;
@@ -115,21 +117,4 @@
   align-items: center;
   flex-direction: row;
   width: 70%;
-}
-.header__bottom-option {
-  flex: 0.25;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  color: white;
-  letter-spacing: 0.25em;
-  transition: all 100ms ease-in-out;
-  cursor: pointer;
-  border: 1px solid transparent;
-}
-.header__bottom-option:hover {
-  color: cyan;
-  border: 1px solid white;
 }

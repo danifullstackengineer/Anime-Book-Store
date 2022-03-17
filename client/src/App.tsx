@@ -69,7 +69,12 @@ function App() {
                   setClickedBasket={setClickedBasket}
                   clickedBasket={clickedBasket}
                 />
-                <Body isMouseOverMenu={isMouseOverMenu} isMainPage={true} clickedBasket={clickedBasket}/>
+                <Body
+                  isMouseOverMenu={isMouseOverMenu}
+                  isMainPage={true}
+                  clickedBasket={clickedBasket}
+                  setClickedBasket={setClickedBasket}
+                />
               </>
             }
           />
@@ -81,7 +86,29 @@ function App() {
                   setClickedBasket={setClickedBasket}
                   clickedBasket={clickedBasket}
                 />
-                <Body isMouseOverMenu={isMouseOverMenu} isMainPage={false} clickedBasket={clickedBasket}/>
+                <Body
+                  isMouseOverMenu={isMouseOverMenu}
+                  isCredential={true}
+                  clickedBasket={clickedBasket}
+                  setClickedBasket={setClickedBasket}
+                />
+              </>
+            }
+          />
+          <Route
+            path="/checkout"
+            element={
+              <>
+                <Header
+                  setClickedBasket={setClickedBasket}
+                  clickedBasket={clickedBasket}
+                />
+                <Body
+                  isMouseOverMenu={isMouseOverMenu}
+                  clickedBasket={undefined}
+                  isCheckout={true}
+                  setClickedBasket={setClickedBasket}
+                />
               </>
             }
           />

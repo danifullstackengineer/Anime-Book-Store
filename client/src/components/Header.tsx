@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../styles/components/header.css";
 import header__logo from "../assets/img/header__logo.png";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -9,6 +9,7 @@ import jwt from "jwt-decode";
 import { addAllItemsToBasket, logoutAction } from "../redux/slice";
 import { useDispatch } from "react-redux";
 import { store } from "../index";
+import Dropdown from "./Header/Dropdown";
 
 function Header({
   clickedBasket,
@@ -18,6 +19,26 @@ function Header({
   setClickedBasket: React.Dispatch<React.SetStateAction<boolean | undefined>>;
 }) {
   const dispatch = useDispatch();
+
+  const [ignoreBasket, setIgnoreBasket] = useState<string[]>(["/checkout"]);
+
+  const [genres, setGenres] = useState<{ link: string; name: string }[]>([
+    { link: "./lightnovels/genre=action", name: "Action" },
+    { link: "./lightnovels/genre=fantasy", name: "Fantasy" },
+    { link: "./lightnovels/genre=isekai", name: "Isekai" },
+    { link: "./lightnovels/genre=dark-fantasy", name: "Dark Fantasy" },
+    { link: "./lightnovels/genre=high-fantasy", name: "High Fantasy" },
+    {
+      link: "./lightnovels/genre=sword-and-sorcery",
+      name: "Sword and Sorcery",
+    },
+    { link: "./lightnovels/genre=horror", name: "Horror" },
+    { link: "./lightnovels/genre=comedy", name: "Comedy" },
+    { link: "./lightnovels/genre=adventure", name: "Adventure" },
+    { link: "./lightnovels/genre=martial-arts", name: "Martial Arts" },
+    { link: "./lightnovels/genre=drama", name: "Drama" },
+    { link: "./lightnovels/genre=harem", name: "Harem" },
+  ]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -53,7 +74,9 @@ function Header({
     navigate("/orders");
   };
   const showCart = (): void => {
-    setClickedBasket(!clickedBasket);
+    if (!ignoreBasket.includes(window.location.pathname)) {
+      setClickedBasket(!clickedBasket);
+    }
   };
 
   const logout = () => {
@@ -113,30 +136,10 @@ function Header({
         </div>
       </div>
       <div className="header__bottom">
-        <div
-          className="header__bottom-option"
-          onClick={() => navigate("/lightnovels")}
-        >
-          Light Novels
-        </div>
-        <div
-          className="header__bottom-option"
-          onClick={() => navigate("/manga")}
-        >
-          Manga
-        </div>
-        <div
-          className="header__bottom-option"
-          onClick={() => navigate("/anime")}
-        >
-          Anime
-        </div>
-        <div
-          className="header__bottom-option"
-          onClick={() => navigate("/hentai")}
-        >
-          Hentai
-        </div>
+        <Dropdown genres={genres} name={"Light Novels"} />
+        <Dropdown genres={genres} name={"Manga"} />
+        <Dropdown genres={genres} name={"Anime"} />
+        <Dropdown genres={genres} name={"Hentai"} special={true}/>
       </div>
     </div>
   );

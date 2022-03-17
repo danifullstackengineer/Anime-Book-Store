@@ -9,15 +9,18 @@ import { getBasketTotal } from "../../redux/slice";
 
 function RightHeader({
   clickedBasket,
+  setClickedBasket,
 }: {
   clickedBasket: boolean | undefined;
+  setClickedBasket: React.Dispatch<React.SetStateAction<boolean | undefined>>;
 }) {
   const navigate = useNavigate();
+  const [navigatedToCheckout, setNavigatedToCheckout] = useState<boolean>(false);
 
   return (
     <div
       className={`rightHeader ${
-        clickedBasket !== undefined
+        clickedBasket !== undefined || navigatedToCheckout
           ? clickedBasket === true
             ? "rightHeader__clicked"
             : "rightHeader__unclicked"
@@ -45,7 +48,11 @@ function RightHeader({
         </div>
         <button
           className="rightHeader__btn"
-          onClick={() => navigate("/checkout")}
+          onClick={() => {
+            setClickedBasket(false);
+            setNavigatedToCheckout(true);
+            navigate("/checkout");
+          }}
         >
           Proceed to Checkout
         </button>

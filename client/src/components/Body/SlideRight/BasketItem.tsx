@@ -5,7 +5,7 @@ import "../../../styles/components/SlideRight/basketItem.css";
 import { removeFromBasketToken } from "../../../logic/basket";
 import { useDispatch } from "react-redux";
 import { removeFromBasketAction } from "../../../redux/slice";
-import { store } from "../../..";
+import { Link } from 'react-router-dom';
 
 function BasketItem({
   image,

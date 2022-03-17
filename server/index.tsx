@@ -1,9 +1,6 @@
-// @ts-ignore
 import express from "express";
-// @ts-ignore
 import cors from "cors";
 import mongoose from "mongoose";
-// @ts-ignore
 import bodyParser from "body-parser";
 import path from "path";
 require("dotenv").config();
@@ -11,7 +8,6 @@ import router from "./router";
 import Stripe from "stripe";
 import schema from "./schema/schema";
 import { graphqlHTTP } from "express-graphql";
-// @ts-ignore
 import { createTransport } from "nodemailer";
 
 const app = express();

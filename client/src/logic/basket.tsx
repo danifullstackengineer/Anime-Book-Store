@@ -53,4 +53,18 @@ const removeFromBasketToken = (id: number) => {
   }
 };
 
-export { addToBasketToken, removeFromBasketToken };
+const removeFromBasketTokenNormalId = (id: number) => {
+  const basket = localStorage.getItem("basket");
+  if (basket) {
+    var myJSON = JSON.parse(basket);
+    const newBasket = myJSON.filter((item: ISliderItem) => item.id !== id);
+    localStorage.removeItem("basket");
+    localStorage.setItem("basket", JSON.stringify(newBasket));
+  }
+};
+
+export {
+  addToBasketToken,
+  removeFromBasketToken,
+  removeFromBasketTokenNormalId,
+};

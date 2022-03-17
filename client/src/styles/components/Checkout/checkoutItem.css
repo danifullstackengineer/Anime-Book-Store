@@ -1,0 +1,79 @@
+.checkoutItem {
+    flex: 1;
+    background-color: rgba(0,0,0,0.5);
+    margin: 1em;
+    border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.checkoutItem__title {
+    color: white;
+    font-size: 1.5rem;
+    margin: 0.25em;
+    text-align: center;
+}
+.checkoutItem__content {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 2em;
+}
+.checkoutItem__content > img {
+    width: 150px;
+    margin-right: 2em;
+}
+.checkoutItem__content-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.checkoutItem__description {
+    font-size: 1.15rem;
+    color: white;
+    min-height: 150px;
+}
+.checkoutItem__bottom {
+    margin-top: 4em;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+}
+.checkoutItem__left {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    flex: 0.8;
+}
+.checkoutItem__left > span {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    text-align: center;
+    margin: 0.2em;
+}
+.checkoutItem__remove {
+    flex: 0.2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.checkoutItem__remove > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: cyan;
+    padding: 0.25em 2.5em 0.25em 2.5em;
+}
+.checkoutItem__star {
+    color: orange;
+}
+.checkoutItem__remove > button:hover{
+    background-color: orange;
+}
